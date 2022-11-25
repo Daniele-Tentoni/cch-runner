@@ -1,0 +1,77 @@
+{
+    "name": "cch-runner",
+    "repository": {
+        "url": "https://github.com/Daniele-Tentoni/cch-runner",
+        "type": "git"
+    },
+    "release": {
+        "branches": [
+            "main",
+            "next"
+        ],
+        "plugins": [
+            "@semantic-release/commit-analyzer",
+            [
+                "@google/semantic-release-replace-plugin",
+                {
+                    "replacements": [
+                        {
+                            "files": [
+                                "pyproject.toml"
+                            ],
+                            "from": "version = \".*\"",
+                            "to": "version = \"${nextRelease.version}\"",
+                            "results": [
+                                {
+                                    "file": "pyproject.toml",
+                                    "hasChanged": true,
+                                    "numMatches": 1,
+                                    "numReplacements": 1
+                                }
+                            ],
+                            "countMatches": true
+                        }
+                    ]
+                }
+            ],
+            "@semantic-release/release-notes-generator",
+            [
+                "@semantic-release/changelog",
+                {
+                    "changelogFile": "CHANGELOG.md"
+                }
+            ],
+            [
+                "@semantic-release/exec",
+                {
+                    "prepareCmd": "poetry build",
+                    "publishCmd": "poetry publish"
+                }
+            ],
+            [
+                "@semantic-release/git",
+                {
+                    "assets": [
+                        "CHANGELOG.md",
+                        "pyproject.toml"
+                    ]
+                }
+            ],
+            [
+                "@semantic-release/github",
+                {
+                    "assets": [
+                        "dist/**"
+                    ]
+                }
+            ]
+        ]
+    },
+    "devDependencies": {
+        "@google/semantic-release-replace-plugin": "^1.1.0",
+        "@semantic-release/changelog": "^6.0.1",
+        "@semantic-release/exec": "^6.0.3",
+        "@semantic-release/git": "^10.0.1",
+        "semantic-release-license": "^1.0.3"
+    }
+}
