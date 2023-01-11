@@ -16,9 +16,11 @@ repos:
     hooks:
       - id: black
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.2.2
+    rev: v3.2.3
     hooks:
       - id: pyupgrade
+        args:
+          - --py310-plus
   - repo: https://github.com/PyCQA/pydocstyle
     rev: 6.1.1
     hooks:
@@ -31,3 +33,8 @@ repos:
     rev: "v2.6" # or any later Vulture version
     hooks:
       - id: vulture
+  - repo: https://github.com/hadialqattan/pycln
+    rev: v2.1.2
+    hooks:
+      - id: pycln
+        args: [--config=pyproject.toml]
