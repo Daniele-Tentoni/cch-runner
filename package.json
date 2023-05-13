@@ -4,11 +4,6 @@
         "url": "https://github.com/Daniele-Tentoni/cch-runner",
         "type": "git"
     },
-    "release": {
-        "extends": [
-            "semantic-release-config-dt-python-poetry"
-        ]
-    },
     "devDependencies": {
         "@google/semantic-release-replace-plugin": "^1.2.0",
         "@semantic-release/changelog": "^6.0.2",
